@@ -35,6 +35,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'slim-rails'
 gem 'bootstrap-sass', '~> 3.3.5.1'
 gem 'bootstrap-generators', '~> 3.3.4'
+gem 'paperclip', '~> 4.3'
+gem 'simple_form'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
