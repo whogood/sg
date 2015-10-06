@@ -6,7 +6,7 @@ class AddRoleToUsers < ActiveRecord::Migration
     add_column :users, :shop_name, :string
     add_column :users, :avatar, :string
     add_column :users, :passport, :string
-    add_column :users, :birthday, :string
+    add_column :users, :birthday, :date
 
     add_index :users, :role
   end

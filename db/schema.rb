@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20151006055051) do
     t.string   "shop_name"
     t.string   "avatar"
     t.string   "passport"
-    t.string   "birthday"
+    t.date     "birthday"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"

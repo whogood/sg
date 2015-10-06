@@ -11,7 +11,7 @@ ul
   = form.hidden_field :role
 
   .form-inputs
-    = form.input :email, required: true
+    = form.input :email,    required: true
     = form.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length)
     = form.input :password_confirmation, required: true
 
@@ -20,8 +20,8 @@ ul
 
     - if resource.admin?
       = form.input :first_name, required: true
-      = form.input :last_name, required: true
-      = form.input :birthday
+      = form.input :last_name,  required: true
+      = form.input :birthday, as: :date
       = form.input :passport, as: :file, required: true
       = form.input :avatar,   as: :file, required: true
 
