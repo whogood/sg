@@ -1,0 +1,31 @@
+h2 Sign up
+
+ul
+  li = link_to "Guest",  new_user_registration_path
+  li = link_to "Seller", new_seller_registration_path
+  li = link_to "Admin",  new_admin_registration_path
+
+= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |form|
+
+  = form.error_notification
+  = form.hidden_field :role
+
+  .form-inputs
+    = form.input :email,    required: true
+    = form.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length)
+    = form.input :password_confirmation, required: true
+
+    - if resource.seller?
+      = form.input :shop_name, required: true
+
+    - if resource.admin?
+      = form.input :first_name, required: true
+      = form.input :last_name,  required: true
+      = form.input :birthday, as: :date
+      = form.input :passport, as: :file, required: true
+      = form.input :avatar,   as: :file, required: true
+
+  .form-actions
+    = form.button :submit, "Sign up"
+
+= render "devise/shared/links"

@@ -29,6 +29,12 @@ html
             li
               a href="/products"
                 | Products
+            li
+              - if user_signed_in?
+                = link_to "Logout", destroy_user_session_path, method: :delete
+              - else
+                = link_to "Login", new_user_session_path
+
     .container
       - flash.each do |name, msg|
         = content_tag :div, class: "alert alert-#{ name == :error ? "danger" : "success" } alert-dismissable", role: "alert" do
