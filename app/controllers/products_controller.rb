@@ -1,9 +1,11 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user!, except: [:show, :index]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :toggle_pro]
+  before_action :authenticate_user!,  except: [:show, :index]
+  before_action :check_seller_rights, except: [:show, :index, :toggle_pro]
+  before_action :check_admin_rights,  only: [:toggle_pro]
 
   def index
-    @products = Product.all
+    @products = user_signed_in? ? Product.all : Product.not_pro
   end
 
   def show
@@ -45,6 +47,12 @@ class ProductsController < ApplicationController
     end
   end
 
+  def toggle_pro
+    @product.is_pro = !@product.is_pro
+    @product.save
+    redirect_to product_url params[:id]
+  end
+
   private
     def set_product
       @product = Product.find(params[:id])
@@ -52,5 +60,17 @@ class ProductsController < ApplicationController
 
     def product_params
       params.require(:product).permit(:name, :description, :photo)
+    end
+
+    def check_seller_rights
+      unless current_user.seller?
+        redirect_to root_url, alert: "You cannot access"
+      end
+    end
+
+    def check_admin_rights
+      unless current_user.admin?
+        redirect_to root_url, alert: "You cannot access"
+      end
     end
 end

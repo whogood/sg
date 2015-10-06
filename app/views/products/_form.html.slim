@@ -1,4 +1,5 @@
 = simple_form_for @product, html: { class: 'form-horizontal' } do |form|
+  = form.input :user_shop_name, disabled: true if current_user.seller?
   = form.input :name
   = form.input :description, as: :text
   = form.input :photo, as: :file

@@ -7,7 +7,9 @@ Rails.application.routes.draw do
     get "users/admin_sign_up", to: "registrations#admin",  as: :new_admin_registration
   end
 
-  resources :products
+  resources :products do
+    get "toggle_pro", on: :member
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
