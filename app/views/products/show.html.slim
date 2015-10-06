@@ -4,6 +4,8 @@ table.table
   tr
     th Name:
     td
+      - if @product.user_shop_name
+        .shopname = @product.user_shop_name
       = @product.name
       - if @product.is_pro
         .small PRO
