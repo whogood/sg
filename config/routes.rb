@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   root to: "products#index"
 
-  devise_for :users
+  devise_for :users,  controllers: { registrations: "registrations" }
+  devise_scope :user do
+    get "users/seller_sign_up", to: "registrations#seller", as: :new_seller_registration
+    get "users/admin_sign_up", to: "registrations#admin",  as: :new_admin_registration
+  end
+
   resources :products
 
   # The priority is based upon order of creation: first created -> highest priority.
